@@ -819,16 +819,102 @@ footer a {
     }
 }
 
-
-
-
-
-
 .project-image {
     width: 100%; /* Full width of the card */
     height: 200px; /* Desired height */
     object-fit: contain; /* Ensures the whole image is visible */
     border-radius: 8px; /* Optional: Adds rounded corners */
     margin-bottom: 10px; /* Space between image and text */
+}
+
+
+
+
+/* Business Ventures */
+.business {
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 900px;
+    text-align: center;
+}
+
+.business h2 {
+    font-size: 2.5em;
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+}
+
+.business h4 {
+    font-size: 2.0em;
+    color: #e46153;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    text-decoration: underline;
+}
+
+/* General styling for business content blocks */
+.business-content {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+/* First content block layout */
+.business-content {
+    flex-direction: row; /* Default is row */
+}
+
+/* Second content block layout */
+.business-content.second-block {
+    flex-direction: row-reverse; /* Positions the second image on the right */
+}
+
+/* Business image styling */
+.business-image1, .business-image2 {
+    flex: 1;
+    max-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.business-image1 img, .business-image2 img {
+    width: 100%;
+    height: auto; /* Ensures no cropping */
+    object-fit: contain; /* Maintains aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Text styling for both blocks */
+.business-text1, .business-text2 {
+    flex: 1;
+    font-size: 1.1em;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    
+    .business-content {
+        flex-direction: column; /* Stacks items vertically */
+        align-items: center; /* Centers items */
+        text-align: center; /* Centers text */
+    }
+
+    /* Explicitly set the second content block's layout for responsiveness */
+    .business-content.second-block {
+        flex-direction: column; /* Stack items vertically in second block */
+    }
+
+    .business-image1, .business-image2 {
+        max-width: 100%;
+    }
+
+    .business-text1, .business-text2 {
+        max-width: 100%; /* Makes text containers full width */
+    }
 }
 
