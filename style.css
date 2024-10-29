@@ -740,7 +740,6 @@ footer a {
     }
 }
 
-/* Contacts Section */
 .contacts {
     padding: 2rem;
     margin: 2rem auto;
@@ -762,7 +761,7 @@ footer a {
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* 3 boxes in a row */
     gap: 1.5rem;
 }
 
@@ -805,17 +804,16 @@ footer a {
     background-color: #c0392b;
 }
 
-@media screen and (max-width: 736px) {
-    .contacts h2 {
-        font-size: 2em;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 boxes in a row on smaller screens */
     }
+}
 
-    .contact-card h3 {
-        font-size: 1.3em;
-    }
-
-    .contact-card p {
-        font-size: 1em;
+@media (max-width: 480px) {
+    .contact-grid {
+        grid-template-columns: 1fr; /* 1 box in a row on very small screens */
     }
 }
 
