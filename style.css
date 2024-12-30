@@ -740,6 +740,7 @@ footer a {
     }
 }
 
+/* Contacts Section */
 .contacts {
     padding: 2rem;
     margin: 2rem auto;
@@ -761,7 +762,7 @@ footer a {
 
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 boxes in a row */
+    grid-template-columns: repeat(3, 1fr); /* 3 equal-width columns */
     gap: 1.5rem;
 }
 
@@ -804,18 +805,26 @@ footer a {
     background-color: #c0392b;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
+
+@media screen and (max-width: 736px) {
+    .contacts h2 {
+        font-size: 2em;
+    }
+
+    .contact-card h3 {
+        font-size: 1.3em;
+    }
+
+    .contact-card p {
+        font-size: 1em;
+    }
+
     .contact-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 boxes in a row on smaller screens */
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Stack to smaller columns on small screens */
     }
 }
 
-@media (max-width: 480px) {
-    .contact-grid {
-        grid-template-columns: 1fr; /* 1 box in a row on very small screens */
-    }
-}
+
 
 .project-image {
     width: 100%; /* Full width of the card */
@@ -827,92 +836,175 @@ footer a {
 
 
 
-
-/* Business Ventures */
-.business {
-    padding: 2rem;
-    margin: 2rem auto;
-    max-width: 900px;
-    text-align: center;
+/* Smoother transitions */
+.project-card, .skill-card, .contact-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.business h2 {
-    font-size: 2.5em;
-    color: #e74c3c;
-    margin-bottom: 1.5rem;
+/* Slightly enhanced card hover effects */
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.business h4 {
-    font-size: 2.0em;
-    color: #e46153;
-    margin-bottom: 1.5rem;
-    text-align: left;
-    text-decoration: underline;
-}
-
-/* General styling for business content blocks */
-.business-content {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    text-align: left;
-}
-
-/* First content block layout */
-.business-content {
-    flex-direction: row; /* Default is row */
-}
-
-/* Second content block layout */
-.business-content.second-block {
-    flex-direction: row-reverse; /* Positions the second image on the right */
-}
-
-/* Business image styling */
-.business-image1, .business-image2 {
-    flex: 1;
-    max-width: 300px;
-    display: flex;
-    justify-content: center;
-}
-
-.business-image1 img, .business-image2 img {
+/* Better image handling */
+.project-image {
     width: 100%;
-    height: auto; /* Ensures no cropping */
-    object-fit: contain; /* Maintains aspect ratio */
-    border-radius: 8px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
 }
 
-/* Text styling for both blocks */
-.business-text1, .business-text2 {
-    flex: 1;
-    font-size: 1.1em;
-    color: #666;
+/* Enhanced section headers */
+section h2 {
+    position: relative;
+    padding-bottom: 10px;
+}
+
+section h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: #e74c3c;
+}
+
+/* Better button styles */
+.project-link, .contact-link {
+    padding: 8px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.project-link:hover, .contact-link:hover {
+    background-color: #c0392b;
+}
+
+/* Improved spacing */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
     line-height: 1.6;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    
-    .business-content {
-        flex-direction: column; /* Stacks items vertically */
-        align-items: center; /* Centers items */
-        text-align: center; /* Centers text */
-    }
 
-    /* Explicitly set the second content block's layout for responsiveness */
-    .business-content.second-block {
-        flex-direction: column; /* Stack items vertically in second block */
-    }
 
-    .business-image1, .business-image2 {
-        max-width: 100%;
-    }
-
-    .business-text1, .business-text2 {
-        max-width: 100%; /* Makes text containers full width */
-    }
+/* Navbar */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(45, 52, 54, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease;
 }
 
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #e74c3c;
+}
+
+/* Add scroll progress indicator */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #e74c3c;
+    z-index: 1001;
+}
+
+/* Project filters */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    background: #f1f2f6;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background: #e74c3c;
+    color: white;
+}
+
+/* Project card improvements */
+.project-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-overlay {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: rgba(45, 52, 54, 0.9);
+    color: white;
+    padding: 1rem;
+    transition: all 0.3s ease;
+}
+
+.project-overlay p {
+    color: white;
+}
+
+.project-card:hover .project-overlay {
+    bottom: 0;
+}
+
+/* Skill progress bars */
+.skill-progress {
+    width: 100%;
+    height: 8px;
+    background: #f1f2f6;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+.progress-bar {
+    height: 100%;
+    background: #e74c3c;
+    border-radius: 4px;
+    transition: width 1s ease;
+}
