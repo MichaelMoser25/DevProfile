@@ -5,75 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="style.css">
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Developer Portfolio - Michael Moser</title>
 </head>
 <body>
-    <header id="header"><div class="inner">
-        <div class="content">
-            <h1>Michael Moser</h1>
-            <h2>Email: mmoser@bell.net<br>
-                Phone: 647-916-0908</h2>
-            <a href="#" class="button big alt"><span>Let's Go</span></a>
+    <!-- Navigation bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">MichaelMoser</div>
+            <ul class="nav-links">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
-        <a href="#" class="button hidden"><span>Let's Go</span></a>
-    </div>
+    </nav>
+
+    <div class="scroll-progress"></div>
+
+    <header id="header">
+        <div class="inner">
+            <div class="content">
+                <h1>Michael Moser</h1>
+                <h2>Email: mmoser@bell.net<br>
+                    Phone: 647-916-0908</h2>
+                <a href="#projects" class="button big alt"><span>Let's Go</span></a>
+            </div>
+        </div>
     </header>
-    
-    <section class="about-me">
-        <div class="about-header">
-            <h2>About Me</h2>
-        </div>
-        <p>Web Developer | Software Engineer | Programmer | Algorithm Developer | Market Trader</p>
-        <div class="about-content">
-            <p>Hello! I'm a passionate software developer with a love for creating innovative solutions. My journey in programming started when I was young, and since then, I've worked on various projects that challenged my skills and expanded my knowledge. I'm always eager to learn and adapt to new technologies.</p>
-            <p>When I'm not coding, you can find me exploring financial markets or enjoying outdoor adventures. I'm excited to connect with like-minded individuals and collaborate on exciting projects!</p>
-        </div>
-    </section>
-    
-    
 
     <section class="projects">
         <h2>Projects</h2>
+        <div class="project-filters">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">Web Dev</button>
+            <button class="filter-btn" data-filter="software">Software</button>
+            <button class="filter-btn" data-filter="automation">Automation</button>
+        </div>
         <div class="project-grid">
-            <div class="project-card">
+            <div class="project-card" data-category="software">
                 <h3>Queen's University Hyperloop GUI</h3>
-                <img src="images/project-one.jpeg" alt="Project One" class="project-image">
-                <p>Worked in a team to develop a GUI for the Queen's Hyperlopp team. This was a fourth month process that involed weekly meetings with the stakeholders to produce the best possible product.</p>
-                <a href="#" class="project-link">View Project</a>
+                <img src="images/project-one.jpeg" alt="Queen's University Hyperloop GUI" class="project-image">
+                <div class="project-overlay">
+                    <p>Python, Qt, GUI Development</p>
+                    <div class="project-links">
+                        <a href="https://michaelmoser25.github.io/Hyperloop-GUI/" class="project-link">View Project</a>
+                        <a href="https://github.com/MichaelMoser25/Hyperloop-GUI?tab=readme-ov-file" class="project-link">Source Code</a>
+                    </div>
+                </div>
+                <p>Worked in a team to develop a GUI for the Queen's Hyperloop team. This was a four-month process that involved weekly meetings with the stakeholders to produce the best possible product.</p>
             </div>
-            <div class="project-card">
+    
+            <div class="project-card" data-category="software">
                 <h3>Restaurant Table Reservation App</h3>
-                <img src="images/project-six.jpeg" alt="Project Six" class="project-image">
-                <p>Developed an app on QT using C++ and other frameworks for a restaurant to handle table reservations. Has a signup and login system as well as full functionality for both user side and manager side.</p>
-                <a href="#" class="project-link">View Project</a>
+                <img src="images/project-six.jpeg" alt="Restaurant Table Reservation App" class="project-image">
+                <div class="project-overlay">
+                    <p>C++, Qt, GUI Development</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="https://github.com/MichaelMoser25/TableReservation" class="project-link">Source Code</a>
+                    </div>
+                </div>
+                <p>Developed an app on Qt using C++ and other frameworks for a restaurant to handle table reservations. It includes a signup and login system with full functionality for both users and managers.</p>
             </div>
-            <div class="project-card">
-                <h3>Walking or Ruinning App</h3>
-                <img src="images/project-two.jpeg" alt="Project Two" class="project-image">
-                <p>This app used the accelorometer in your phone to determine if the user is walking or running. A chart is the generated with the active frequencies which are then classified respectivly.</p>
-                <a href="#" class="project-link">View Project</a>
+    
+            <div class="project-card" data-category="software">
+                <h3>Walking or Running App</h3>
+                <img src="images/project-two.jpeg" alt="Walking or Running App" class="project-image">
+                <div class="project-overlay">
+                    <p>Python, Mobile Development</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="https://github.com/MichaelMoser25/292-Walk-Run-App" class="project-link">Source Code</a>
+                    </div>
+                </div>
+                <p>This app uses the accelerometer in your phone to determine if the user is walking or running. A chart is generated with the active frequencies, which are then classified accordingly.</p>
             </div>
-            <div class="project-card">
+    
+            <div class="project-card" data-category="web">
                 <h3>Front-End Development</h3>
-                <img src="images/project-three.jpeg" alt="Project Three" class="project-image">
-                <p>Simple front end for a userbased application where uses can interact with other profiles.</p>
-                <a href="#" class="project-link">View Project</a>
+                <img src="images/project-three.jpeg" alt="Front-End Development" class="project-image">
+                <div class="project-overlay">
+                    <p>HTML, CSS, JavaScript, React</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">Source Code</a>
+                    </div>
+                </div>
+                <p>Simple front-end for a user-based application where users can interact with other profiles.</p>
             </div>
-            <div class="project-card">
+    
+            <div class="project-card" data-category="web">
                 <h3>Drag and Drop Website Builder</h3>
-                <img src="images/project-four.jpeg" alt="Project Four" class="project-image">
-                <p>A website builder where you can drag and drop blocks to develop a custom website. The code is then generated and can be easily modified to fit all applications.</p>
-                <a href="#" class="project-link">View Project</a>
+                <img src="images/project-four.jpeg" alt="Drag and Drop Website Builder" class="project-image">
+                <div class="project-overlay">
+                    <p>HTML, CSS, JavaScript, Web Development</p>
+                    <div class="project-links">
+                        <a href="https://michaelmoser25.github.io/WebsiteBuilder/" class="project-link">View Project</a>
+                        <a href="https://github.com/MichaelMoser25/WebsiteBuilder" class="project-link">Source Code</a>
+                    </div>
+                </div>
+                <p>A website builder where you can drag and drop blocks to develop a custom website. The code is then generated and can be easily modified to fit various applications.</p>
             </div>
-            <div class="project-card">
+    
+            <div class="project-card" data-category="automation">
                 <h3>Retail Purchase Automation Bot GUI</h3>
-                <img src="images/project-five.jpeg" alt="Project Five" class="project-image">
+                <img src="images/project-five.jpeg" alt="Retail Purchase Automation Bot GUI" class="project-image">
+                <div class="project-overlay">
+                    <p>Python, Qt, Automation</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="#" class="project-link">Source Code</a>
+                    </div>
+                </div>
                 <p>Worked in a team to develop the GUI for a company that developed a Retail Purchase Automation Bot.</p>
-                <a href="#" class="project-link">View Project</a>
+            </div>
+    
+            <div class="project-card" data-category="software">
+                <h3>Notes App</h3>
+                <img src="images/project-seven.jpeg" alt="Notes App" class="project-image">
+                <div class="project-overlay">
+                    <p>Python, SQL Database, Flask, JavaScript, HTML</p>
+                    <div class="project-links">
+                        <a href="#" class="project-link">View Project</a>
+                        <a href="https://github.com/MichaelMoser25/NotesApp" class="project-link">Source Code</a>
+                    </div>
+                </div>
+                <p>Developed a Notes app where users can sign up, log in, and store their notes securely in a database. Notes are only accessible to the user if their password matches the associated email.</p>
             </div>
         </div>
     </section>
-    
     
 
     <section class="skills">
@@ -82,31 +146,47 @@
             <div class="skill-card">
                 <h3>Web Development</h3>
                 <p>HTML, CSS, JavaScript, React</p>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="90%"></div>
+                </div>
             </div>
             <div class="skill-card">
                 <h3>Software Engineering</h3>
                 <p>Java, C++, Python</p>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="90%"></div>
+                </div>
             </div>
             <div class="skill-card">
                 <h3>Algorithm Development</h3>
                 <p>Data Structures, Algorithms, Problem Solving</p>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="90%"></div>
+                </div>
             </div>
             <div class="skill-card">
                 <h3>Market Trading</h3>
                 <p>Technical Analysis, Trading Strategies</p>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="90%"></div>
+                </div>
             </div>
             <div class="skill-card">
                 <h3>Database Management</h3>
                 <p>MySQL, PostgreSQL, MongoDB</p>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="90%"></div>
+                </div>
             </div>
             <div class="skill-card">
                 <h3>Cloud Computing</h3>
                 <p>AWS, Azure, Google Cloud</p>
+                <div class="skill-progress">
+                    <div class="progress-bar" data-progress="90%"></div>
+                </div>
             </div>
         </div>
     </section>
-    
-    
 
     <section class="contacts">
         <h2>Contact Me</h2>
@@ -119,7 +199,7 @@
             </div>
             <div class="contact-card">
                 <h3>LinkedIn</h3>
-                <p>www.linkedin.com/in/michael-moser-968117260</p>
+                <p>linkedin.com/in/michael-moser-968117260/</p>
                 <a href="https://www.linkedin.com/in/michael-moser-968117260/" target="_blank" class="contact-link">Connect</a>
             </div>
             <div class="contact-card">
@@ -127,18 +207,19 @@
                 <p>github.com/MichaelMoser25</p>
                 <a href="https://github.com/MichaelMoser25" target="_blank" class="contact-link">View Profile</a>
             </div>
+            <!-- <div class="contact-card">
+                <h3>Twitter</h3>
+                <p>@yourtwitterhandle</p>
+                <a href="https://twitter.com/yourtwitterhandle" target="_blank" class="contact-link">Follow Me</a>
+            </div> -->
         </div>
     </section>
-    
-    
-    <footer>
-        <p>&copy; 2024 Michael Moser. All rights reserved.</p>
-    </footer>
 
-		<!-- Scripts -->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/skel.min.js"></script>
-        <script src="js/util.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    <script src="js/filters.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
 </html>
