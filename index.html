@@ -4,22 +4,617 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="style.css">
-    <!-- Add Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <title>Developer Portfolio - Michael Moser</title>
+    <title>Michael Moser - Developer Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --bg-light: #ecf0f1;
+            --white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Cursor Effect */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s ease;
+        }
+
+        .cursor-outline {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+
+        /* Hero Section */
+        #header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float 20s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-100px) translateX(50px); }
+            50% { transform: translateY(-50px) translateX(-50px); }
+            75% { transform: translateY(-150px) translateX(100px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 10;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-content h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s backwards;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+            font-size: 1.1rem;
+        }
+
+        /* Project Filters */
+        .project-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 2rem;
+            border: 2px solid var(--primary-color);
+            background: transparent;
+            color: var(--primary-color);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: var(--primary-color);
+            transition: all 0.5s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .filter-btn:hover::before,
+        .filter-btn.active::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: white;
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-image-wrapper {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.1);
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.9), rgba(52, 152, 219, 0.9));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-overlay p {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            padding: 0.5rem 1.5rem;
+            background: white;
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .skill-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .skill-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 10px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .contact-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            word-break: break-word;
+        }
+
+        .contact-link {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--accent-color);
+            transform: scale(1.05);
+        }
+
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 5rem 2rem;
+                box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation bar -->
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-content">
-            <div class="nav-logo">MichaelMoser</div>
+            <div class="nav-logo">MM</div>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links">
                 <li><a href="#header">Home</a></li>
-                <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -27,202 +622,245 @@
         </div>
     </nav>
 
-    <div class="scroll-progress"></div>
-
+    <!-- Hero Section -->
     <header id="header">
-        <div class="inner">
-            <div class="content">
-                <h1>Michael Moser</h1>
-                <h2>Email: mmoser@bell.net<br>
-                    Phone: 647-916-0908</h2>
-                <a href="#projects" class="button big alt"><span>Let's Go</span></a>
-            </div>
+        <div class="particles"></div>
+        <div class="hero-content">
+            <h1>Michael Moser</h1>
+            <h2>Software Developer & Creative Problem Solver</h2>
+            <p style="margin-bottom: 2rem;">mmoser@bell.net | 647-916-0908</p>
+            <a href="#projects" class="hero-btn">View My Work</a>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </header>
 
-    <section class="projects">
-        <h2>Projects</h2>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Explore my portfolio of innovative solutions</p>
+        
         <div class="project-filters">
-            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn active" data-filter="all">All Projects</button>
             <button class="filter-btn" data-filter="web">Web Dev</button>
             <button class="filter-btn" data-filter="software">Software</button>
             <button class="filter-btn" data-filter="automation">Automation</button>
         </div>
+
         <div class="project-grid">
-            <div class="project-card" data-category="software">
-                <h3>Queen's University Hyperloop GUI</h3>
-                <img src="images/project-one.jpeg" alt="Queen's University Hyperloop GUI" class="project-image">
-                <div class="project-overlay">
-                    <p>Python, Qt, GUI Development</p>
-                    <div class="project-links">
-                        <a href="https://michaelmoser25.github.io/Hyperloop-GUI/" class="project-link">View Project</a>
-                        <a href="https://github.com/MichaelMoser25/Hyperloop-GUI?tab=readme-ov-file" class="project-link">Source Code</a>
+            <div class="project-card show" data-category="software">
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600" alt="Hyperloop GUI" class="project-image">
+                    <div class="project-overlay">
+                        <p>Python • Qt • GUI Development</p>
+                        <div class="project-links">
+                            <a href="https://michaelmoser25.github.io/Hyperloop-GUI/" class="project-link">Live Demo</a>
+                            <a href="https://github.com/MichaelMoser25/Hyperloop-GUI?tab=readme-ov-file" class="project-link">GitHub</a>
+                        </div>
                     </div>
                 </div>
-                <p>Worked in a team to develop a GUI for the Queen's Hyperloop team. This was a four-month process that involved weekly meetings with the stakeholders to produce the best possible product.</p>
+                <div class="project-content">
+                    <h3>Queen's University Hyperloop GUI</h3>
+                    <p>Developed a comprehensive GUI for the Queen's Hyperloop team through a four-month collaborative process with weekly stakeholder meetings.</p>
+                </div>
             </div>
-    
+
             <div class="project-card" data-category="software">
-                <h3>Restaurant Table Reservation App</h3>
-                <img src="images/project-six.jpeg" alt="Restaurant Table Reservation App" class="project-image">
-                <div class="project-overlay">
-                    <p>C++, Qt, GUI Development</p>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Project</a>
-                        <a href="https://github.com/MichaelMoser25/TableReservation" class="project-link">Source Code</a>
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600" alt="Restaurant App" class="project-image">
+                    <div class="project-overlay">
+                        <p>C++ • Qt • Database</p>
+                        <div class="project-links">
+                            <a href="https://github.com/MichaelMoser25/TableReservation" class="project-link">GitHub</a>
+                        </div>
                     </div>
                 </div>
-                <p>Developed an app on Qt using C++ and other frameworks for a restaurant to handle table reservations. It includes a signup and login system with full functionality for both users and managers.</p>
+                <div class="project-content">
+                    <h3>Restaurant Reservation System</h3>
+                    <p>Full-featured table reservation app with user authentication and manager dashboard built with Qt and C++.</p>
+                </div>
             </div>
-    
+
             <div class="project-card" data-category="software">
-                <h3>Walking or Running App</h3>
-                <img src="images/project-two.jpeg" alt="Walking or Running App" class="project-image">
-                <div class="project-overlay">
-                    <p>Python, Mobile Development</p>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Project</a>
-                        <a href="https://github.com/MichaelMoser25/292-Walk-Run-App" class="project-link">Source Code</a>
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600" alt="Activity Tracker" class="project-image">
+                    <div class="project-overlay">
+                        <p>Python • Mobile • ML</p>
+                        <div class="project-links">
+                            <a href="https://github.com/MichaelMoser25/292-Walk-Run-App" class="project-link">GitHub</a>
+                        </div>
                     </div>
                 </div>
-                <p>This app uses the accelerometer in your phone to determine if the user is walking or running. A chart is generated with the active frequencies, which are then classified accordingly.</p>
+                <div class="project-content">
+                    <h3>Activity Classification App</h3>
+                    <p>Utilizes phone accelerometer data to accurately classify walking vs running activities with real-time frequency analysis.</p>
+                </div>
             </div>
-    
+
             <div class="project-card" data-category="web">
-                <h3>Front-End Development</h3>
-                <img src="images/project-three.jpeg" alt="Front-End Development" class="project-image">
-                <div class="project-overlay">
-                    <p>HTML, CSS, JavaScript, React</p>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Project</a>
-                        <a href="#" class="project-link">Source Code</a>
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600" alt="Front-End" class="project-image">
+                    <div class="project-overlay">
+                        <p>React • JavaScript • CSS</p>
                     </div>
                 </div>
-                <p>Simple front-end for a user-based application where users can interact with other profiles.</p>
+                <div class="project-content">
+                    <h3>Interactive User Platform</h3>
+                    <p>Modern front-end application enabling seamless user interactions and profile management.</p>
+                </div>
             </div>
-    
+
             <div class="project-card" data-category="web">
-                <h3>Drag and Drop Website Builder</h3>
-                <img src="images/project-four.jpeg" alt="Drag and Drop Website Builder" class="project-image">
-                <div class="project-overlay">
-                    <p>HTML, CSS, JavaScript, Web Development</p>
-                    <div class="project-links">
-                        <a href="https://michaelmoser25.github.io/WebsiteBuilder/" class="project-link">View Project</a>
-                        <a href="https://github.com/MichaelMoser25/WebsiteBuilder" class="project-link">Source Code</a>
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?w=600" alt="Website Builder" class="project-image">
+                    <div class="project-overlay">
+                        <p>JavaScript • HTML • CSS</p>
+                        <div class="project-links">
+                            <a href="https://michaelmoser25.github.io/WebsiteBuilder/" class="project-link">Live Demo</a>
+                            <a href="https://github.com/MichaelMoser25/WebsiteBuilder" class="project-link">GitHub</a>
+                        </div>
                     </div>
                 </div>
-                <p>A website builder where you can drag and drop blocks to develop a custom website. The code is then generated and can be easily modified to fit various applications.</p>
+                <div class="project-content">
+                    <h3>Drag & Drop Website Builder</h3>
+                    <p>Intuitive website builder with drag-and-drop functionality and automatic code generation.</p>
+                </div>
             </div>
-    
+
             <div class="project-card" data-category="automation">
-                <h3>Retail Purchase Automation Bot GUI</h3>
-                <img src="images/project-five.jpeg" alt="Retail Purchase Automation Bot GUI" class="project-image">
-                <div class="project-overlay">
-                    <p>Python, Qt, Automation</p>
-                    <div class="project-links">
-                        <a href="#" class="project-link">View Project</a>
-                        <a href="#" class="project-link">Source Code</a>
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600" alt="Automation Bot" class="project-image">
+                    <div class="project-overlay">
+                        <p>Python • Qt • Automation</p>
                     </div>
                 </div>
-                <p>Worked in a team to develop the GUI for a company that developed a Retail Purchase Automation Bot.</p>
+                <div class="project-content">
+                    <h3>Retail Automation Bot GUI</h3>
+                    <p>Professional GUI interface for retail purchase automation, developed in team collaboration.</p>
+                </div>
             </div>
-    
+
             <div class="project-card" data-category="software">
-                <h3>Notes App</h3>
-                <img src="images/project-seven.jpeg" alt="Notes App" class="project-image">
-                <div class="project-overlay">
-                    <p>Python, SQL Database, Flask, JavaScript, HTML</p>
-                    <div class="project-links">
-                        <a href="http://67.217.246.118" class="project-link">View Project</a>
-                        <a href="https://github.com/MichaelMoser25/NotesApp" class="project-link">Source Code</a>
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=600" alt="Notes App" class="project-image">
+                    <div class="project-overlay">
+                        <p>Flask • SQL • JavaScript</p>
+                        <div class="project-links">
+                            <a href="http://67.217.246.118" class="project-link">Live Demo</a>
+                            <a href="https://github.com/MichaelMoser25/NotesApp" class="project-link">GitHub</a>
+                        </div>
                     </div>
                 </div>
-                <p>Developed a Notes app where users can sign up, log in, and store their notes securely in a database. Notes are only accessible to the user if their password matches the associated email.</p>
+                <div class="project-content">
+                    <h3>Secure Notes Application</h3>
+                    <p>Full-stack notes app with user authentication and encrypted database storage.</p>
+                </div>
             </div>
         </div>
     </section>
-    
 
-    <section class="skills">
-        <h2>Skills</h2>
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <h2 class="section-title">Skills & Expertise</h2>
+        <p class="section-subtitle">Technologies and tools I work with</p>
+        
         <div class="skills-container">
             <div class="skill-card">
                 <h3>Web Development</h3>
-                <p>HTML, CSS, JavaScript, React</p>
+                <p>HTML • CSS • JavaScript • React</p>
                 <div class="skill-progress">
-                    <div class="progress-bar" data-progress="90%"></div>
+                    <div class="progress-bar" data-progress="90"></div>
                 </div>
             </div>
             <div class="skill-card">
                 <h3>Software Engineering</h3>
-                <p>Java, C++, Python</p>
+                <p>Java • C++ • Python</p>
                 <div class="skill-progress">
-                    <div class="progress-bar" data-progress="90%"></div>
+                    <div class="progress-bar" data-progress="90"></div>
                 </div>
             </div>
             <div class="skill-card">
                 <h3>Algorithm Development</h3>
-                <p>Data Structures, Algorithms, Problem Solving</p>
+                <p>Data Structures • Problem Solving</p>
                 <div class="skill-progress">
-                    <div class="progress-bar" data-progress="90%"></div>
+                    <div class="progress-bar" data-progress="90"></div>
                 </div>
             </div>
             <div class="skill-card">
                 <h3>Market Trading</h3>
-                <p>Technical Analysis, Trading Strategies</p>
+                <p>Technical Analysis • Strategies</p>
                 <div class="skill-progress">
-                    <div class="progress-bar" data-progress="90%"></div>
+                    <div class="progress-bar" data-progress="90"></div>
                 </div>
             </div>
             <div class="skill-card">
                 <h3>Database Management</h3>
-                <p>MySQL, PostgreSQL, MongoDB</p>
+                <p>MySQL • PostgreSQL • MongoDB</p>
                 <div class="skill-progress">
-                    <div class="progress-bar" data-progress="90%"></div>
+                    <div class="progress-bar" data-progress="90"></div>
                 </div>
             </div>
             <div class="skill-card">
                 <h3>Cloud Computing</h3>
-                <p>AWS, Azure, Google Cloud</p>
+                <p>AWS • Azure • Google Cloud</p>
                 <div class="skill-progress">
-                    <div class="progress-bar" data-progress="90%"></div>
+                    <div class="progress-bar" data-progress="90"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contacts">
-        <h2>Contact Me</h2>
-        <p>If you’d like to get in touch, feel free to reach out via any of the platforms below!</p>
+    <!-- Contact Section -->
+    <section id="contact" class="contacts">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Let's discuss your next project</p>
+        
         <div class="contact-grid">
             <div class="contact-card">
+                <i class="fas fa-envelope"></i>
                 <h3>Email</h3>
                 <p>mmoser@bell.net</p>
-                <a href="mailto:mmoser@bell.net" class="contact-link">Send Email</a>
+                <a href="mailto:mmoser@bell.net" class="contact-link">Send Message</a>
             </div>
             <div class="contact-card">
+                <i class="fab fa-linkedin"></i>
                 <h3>LinkedIn</h3>
-                <p>linkedin.com/in/michael-moser-968117260/</p>
+                <p>Connect professionally</p>
                 <a href="https://www.linkedin.com/in/michael-moser-968117260/" target="_blank" class="contact-link">Connect</a>
             </div>
             <div class="contact-card">
+                <i class="fab fa-github"></i>
                 <h3>GitHub</h3>
-                <p>github.com/MichaelMoser25</p>
+                <p>View my code</p>
                 <a href="https://github.com/MichaelMoser25" target="_blank" class="contact-link">View Profile</a>
             </div>
-            <!-- <div class="contact-card">
-                <h3>Twitter</h3>
-                <p>@yourtwitterhandle</p>
-                <a href="https://twitter.com/yourtwitterhandle" target="_blank" class="contact-link">Follow Me</a>
-            </div> -->
         </div>
     </section>
 
-    <script src="js/filters.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/util.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        // Custom Cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
 
-</body>
-</html>
+        window.addEventListener('mousemove', (e) => {
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+            
+            cursorOutline.style.left = e.clientX + 'px';
+            cursorOutline.style.top = e.clientY + 'px';
+        });
+
+        // Particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+                particles
